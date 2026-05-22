@@ -124,3 +124,42 @@ async function run() {
       res.json(result)
     })
 
+    app.patch('/all-facilities/:id', async (req, res) => {
+      const id = req.params.id
+
+      const updateData = req.body
+      const result = await facilityCollection.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: updateData }
+      )
+      res.json(result)
+    })
+
+    app.delete('/all-facilities/:id', async (req, res) => {
+      const id = req.params.id
+      const result = await facilityCollection.deleteOne(
+        { _id: new ObjectId(id) }
+      )
+      res.json(result)
+    })
+
+    app.get('/manage-my-facilities', middleware, async (req, res) => {
+      const result = await facilityCollection.find().toArray()
+      res.json(result)
+    })
+
+    // await client.db("admin").command({ ping: 1 });
+    // console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // await client.close();
+  }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
