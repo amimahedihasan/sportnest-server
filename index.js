@@ -96,3 +96,31 @@ async function run() {
       )
       res.json(result)
     })
+
+    app.post('/all-facilities', middleware, async (req, res) => {
+      const add = req.body
+      const result = await facilityCollection.insertOne(add);
+      res.json(result)
+    })
+
+    app.get('/all-facilities', async (req, res) => {
+      const result = await facilityCollection.find().toArray()
+      res.json(result);
+    })
+
+    app.get('/featured-facilities', async (req, res) => {
+      const result = await facilityCollection.find().limit(6).toArray()
+      res.json(result)
+    })
+
+    app.get('/all-facilities/:id', middleware, async (req, res) => {
+      const id = req.params.id
+
+      const query = {
+        _id: new ObjectId(id)
+      }
+
+      const result = await facilityCollection.findOne(query)
+      res.json(result)
+    })
+
