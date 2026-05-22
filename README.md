@@ -6,7 +6,12 @@ The server provides RESTful APIs that connect the client application with MongoD
 
 ---
 
-## Live Server
+## Live Server- Client Link
+ https://sport-nest-client-liart.vercel.app/
+
+---
+
+## Live Server  Link
 
 https://sport-nest-server-rho.vercel.app
 
