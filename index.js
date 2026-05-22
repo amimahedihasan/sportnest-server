@@ -77,3 +77,22 @@ async function run() {
       const result = await facilityCollection.find(query).toArray();
       res.json(result);
     });
+
+    app.post('/my-bookings', async (req, res) => {
+      const add = req.body;
+      const result = bookingCollection.insertOne(add);
+      res.json(result)
+    })
+
+    app.get('/my-bookings', middleware, async (req, res) => {
+      const result = await bookingCollection.find().toArray();
+      res.json(result)
+    })
+
+    app.delete('/my-bookings/:id', async (req, res) => {
+      const id = req.params.id
+      const result = await bookingCollection.deleteOne(
+        { _id: new ObjectId(id) }
+      )
+      res.json(result)
+    })
