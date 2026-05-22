@@ -130,7 +130,7 @@ async function run() {
       const updateData = req.body
       const result = await facilityCollection.updateOne(
         { _id: new ObjectId(id) },
-        { set: updateData }
+        { $set: updateData }
       )
       res.json(result)
     })
